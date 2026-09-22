@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: civicshield-safestop-postgres
+    environment:
+      POSTGRES_DB: safestop
+      POSTGRES_USER: safestop
+      POSTGRES_PASSWORD: safestop_local_only
+    ports:
+      - "5433:5432"
+    volumes:
+      - safestop-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U safestop -d safestop"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  safestop-postgres-data:

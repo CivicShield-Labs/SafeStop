@@ -1,0 +1,39 @@
+server:
+  port: ${PORT:8082}
+
+spring:
+  application:
+    name: safestop
+
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5433/safestop}
+    username: ${DATABASE_USERNAME:safestop}
+    password: ${DATABASE_PASSWORD:safestop_local_only}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+  flyway:
+    enabled: true
+
+  security:
+    user:
+      name: ${SAFESTOP_USER:civicshield}
+      password: ${SAFESTOP_PASSWORD:change-this-before-any-deployment}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+civicshield:
+  simulator:
+    base-url: ${CIVICSHIELD_SIMULATOR_URL:http://localhost:8081}
+
+  platform:
+    base-url: ${CIVICSHIELD_PLATFORM_URL:http://localhost:8080}
+    username: ${CIVICSHIELD_PLATFORM_USER:civicshield}
+    password: ${CIVICSHIELD_PLATFORM_PASSWORD:change-this-before-any-deployment}
